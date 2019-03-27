@@ -25,4 +25,24 @@ describe 'as a User' do
       end
     end
   end
+
+  it "won't display certain fuel types" do
+    VCR.use_cassette("station") do
+
+      visit '/'
+
+      fill_in :q, with: 80206
+
+      click_on "Locate"
+
+      expect(current_path).to eq("/search")
+
+      expect(page).to_not have_content("Fuel Types: LNG")
+      expect(page).to_not have_content("Fuel Types: HY")
+      expect(page).to_not have_content("Fuel Types: E85")
+      expect(page).to_not have_content("Fuel Types: CNG")
+      expect(page).to_not have_content("Fuel Types: BD")
+      expect(page).to_not have_content("Fuel Types: all")
+    end
+  end
 end
