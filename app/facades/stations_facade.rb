@@ -5,6 +5,7 @@ class StationsFacade
 
   def stations
     response = service.get_stations
+    # binding.pry
   end
 
   def service
