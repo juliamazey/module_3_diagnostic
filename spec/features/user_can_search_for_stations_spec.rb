@@ -15,11 +15,11 @@ describe 'as a User' do
     within "#Stations" do
       expect(page).to have_css(".station", count: 15)
       within (all(".station").first) do
-        expect(page).to have_content("Name: ")
-        expect(page).to have_content("Address: ")
-        expect(page).to have_content("Fuel Types: ")
-        expect(page).to have_content("Distance: ")
-        expect(page).to have_content("Access Times: ")
+        expect(page).to have_content("Name: PUBLIC STATIONS")
+        expect(page).to have_content("Address: 2951-2985 E 3rd Ave")
+        expect(page).to have_content("Fuel Types: ELEC")
+        expect(page).to have_content("Distance: 0.62888")
+        expect(page).to have_content("Access Times: 24 hours dailyq")
       end
     end
   end
