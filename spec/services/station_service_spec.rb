@@ -1,17 +1,16 @@
 require 'rails_helper'
 
 describe StationService do
-  before :each do
-    @zip_code = 80206
-    @station_service = StationService.new(@zip_code)
-  end
 
   it 'exists' do
-    expect(@station_service).to be_a(StationService)
+    zip_code = 80206
+    station_service = StationService.new(zip_code)
+    expect(station_service).to be_a(StationService)
   end
 
   it '.get_stations' do
-    stations = @station_service.get_stations
+    station_service = StationService.new(zip_code)
+    stations = station_service.get_stations
 
     expect(stations.count).to eq(15)
     station = stations[1]
