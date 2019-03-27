@@ -3,10 +3,12 @@
 <section id="Stations">
 
 <% facade.stations.each do |station| %>
-  <li class="station"> <%= station.name %>
-    <ul>
-
-    </ul>
+  <li class="station">
+    <ul>Name: <%= station.name %></ul>
+    <ul>Address: <%= station.address %></ul>
+    <ul>Fuel Types: <%= station.fuel_types %></ul>
+    <ul>Distance: <%= station.distance %></ul>
+    <ul>Access Times: <%= station.access_times %></ul>
   </li>
 <% end %>
 
