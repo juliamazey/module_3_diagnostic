@@ -10,6 +10,12 @@ describe StationService do
 
   it '.get_stations' do
     station_service = StationService.new(zip_code)
+
+    json_response = File.open('./fixtures/stations.json')
+    query_params = "location=80206&fuel_type=ELEC,LPG&limit=15&api_key=#{ENV['API_KEY']}&format=JSON&radius=5.0&access=public&status=E"
+      stub_request(:get, "/api/alt-fuel-stations/v1/nearest.json?#{query_params}")
+        .to_return(status: 200, body: json_response)
+
     stations = station_service.get_stations
 
     expect(stations.count).to eq(15)
