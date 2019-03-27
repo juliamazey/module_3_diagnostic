@@ -9,17 +9,18 @@ describe StationService do
   end
 
   it '.get_stations' do
+    zip_code = 80206
     station_service = StationService.new(zip_code)
 
     json_response = File.open('./fixtures/stations.json')
-    query_params = "location=80206&fuel_type=ELEC,LPG&limit=15&api_key=#{ENV['API_KEY']}&format=JSON&radius=5.0&access=public&status=E"
-      stub_request(:get, "/api/alt-fuel-stations/v1/nearest.json?#{query_params}")
+    query_params = "location=#{zip_code}&fuel_type=ELEC,LPG&limit=15&api_key=#{ENV['API_KEY']}&format=JSON&radius=5.0&access=public&status=E"
+    mock = stub_request(:get, "/api/alt-fuel-stations/v1/nearest.json?#{query_params}")
         .to_return(status: 200, body: json_response)
 
-    stations = station_service.get_stations
+    to_ruby = JSON.parse(mock.response.body, symbolize_names: true)[:fuel_stations]
 
-    expect(stations.count).to eq(15)
-    station = stations[1]
+    expect(to_ruby.count).to eq(15)
+    station = to_ruby[1]
 
     expect(station[:station_name]).to eq("9&CO")
     expect(station[:street_address]).to eq("4040-4110 E 11th Ave")
